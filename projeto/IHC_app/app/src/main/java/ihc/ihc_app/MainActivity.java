@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void open_routines (View view){
+        Intent intent = new Intent (this, routineActivity.class);
+        startActivity(intent);
+    }
+
 }
