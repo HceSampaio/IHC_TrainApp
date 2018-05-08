@@ -11,20 +11,45 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/parentTitle"
+            android:id="@+id/Destination"
             android:padding="16dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/Hour"
+            android:padding="16dp"
+            android:layout_toRightOf="@id/Destination"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/Days"
+            android:padding="16dp"
+            android:layout_toRightOf="@id/Hour"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <ImageButton
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true">
+
+        </Switch>
+
+        <!--<ImageButton
             android:id="@+id/expandArrow"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_alignParentRight="true"
             android:layout_margin="8dp"
             android:src="@android:drawable/arrow_down_float"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        -->
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -41,15 +41,19 @@ public class MyAdapter extends ExpandableRecyclerAdapter<MyParentViewHolder,MyCh
     @Override
     public void onBindParentViewHolder(MyParentViewHolder titleParentViewHolder, int i, Object o) {
         TitleParent title = (TitleParent)o;
-        titleParentViewHolder._textView.setText(title.getTitle());
+        titleParentViewHolder._textViewDest.setText(title.getDestination());
+        titleParentViewHolder._textViewHour.setText(title.getHours());
+        titleParentViewHolder._textViewDays.setText(title.getDaysAsString());//TODO:CUSTOM STRING
 
     }
 
     @Override
     public void onBindChildViewHolder(MyChildViewHolder titleChildViewHolder, int i, Object o) {
         TitleChild title = (TitleChild)o;
-        titleChildViewHolder.option1.setText(title.getOption1());
-        titleChildViewHolder.option2.setText(title.getOption2());
+        titleChildViewHolder.comboio.setText("COMBOIO :"+title.getComboio());
+        titleChildViewHolder.carruagem.setText("CARRUAGEM :"+title.getCarruagem());
+        titleChildViewHolder.lugar.setText("LUGAR :"+title.getLugar());
+        titleChildViewHolder.before.setText("ANTECENDENCIA :"+title.getBefore()+" min");
 
     }
 }

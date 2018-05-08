@@ -10,17 +10,29 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/option1"
+            android:id="@+id/comboio"
             android:padding="8dp"
             android:text="Option 1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_below="@id/option1"
-            android:id="@+id/option2"
+            android:layout_below="@id/comboio"
+            android:id="@+id/carruagem"
             android:padding="8dp"
-            android:text="Option 2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/carruagem"
+            android:id="@+id/lugar"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@id/lugar"
+            android:id="@+id/before"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -9,11 +9,14 @@ import ihc.ihc_app.R;
 
 public class MyChildViewHolder extends ChildViewHolder {
 
-    public TextView option1,option2;
+    public TextView comboio,carruagem,lugar,before;
 
     public MyChildViewHolder(View itemView) {
         super(itemView);
-        option1 = (TextView)itemView.findViewById(R.id.option1);
-        option2 = (TextView)itemView.findViewById(R.id.option2);
+        comboio = (TextView)itemView.findViewById(R.id.comboio);
+        carruagem = (TextView)itemView.findViewById(R.id.carruagem);
+        lugar = (TextView)itemView.findViewById(R.id.lugar);
+        before = (TextView)itemView.findViewById(R.id.before);
+
     }
 }

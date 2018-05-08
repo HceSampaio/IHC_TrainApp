@@ -9,11 +9,36 @@ public class TitleParent implements ParentObject{
 
     private List<Object> mChildrenList; //lista de filhos
     private UUID _id; //id
-    private String title; //Text
+    private String destination; //Text
+    private String hours;
+    private String[] days;
 
-    public TitleParent(String title) { //recebem texto para o seu titulo
-        this.title = title;
+    public TitleParent(String dest,String hours,String[] days) { //recebem texto para o seu titulo
+        this.destination = dest;
+        this.hours = hours;
+        this.days = days;
         _id = UUID.randomUUID();
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public String[] getDays() {
+        return days;
+    }
+
+    public String getDaysAsString() {
+        String str = "";
+        for(int i=0;i<days.length;i++){
+            str += days[i] +",";
+        }
+        str.substring(0,str.length()-2);
+        return str;
     }
 
     public UUID get_id() {
@@ -24,14 +49,19 @@ public class TitleParent implements ParentObject{
         this._id = _id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setHours(String hours) {
+        this.hours = hours;
     }
 
+    public void setDays(String[] days) {
+        this.days = days;
+    }
+
+    //childList
     @Override
     public List<Object> getChildObjectList() {
         return mChildrenList;

@@ -2,27 +2,48 @@ package ihc.ihc_app.Models;
 
 public class TitleChild {
 
-    public String option1;
-    public String option2;
+    public String comboio;
+    public String carruagem;
+    public String lugar;
+    public int before;
 
-    public TitleChild(String option1, String option2) {
-        this.option1 = option1;
-        this.option2 = option2;
+
+    public TitleChild(String comboio, String carruagem, String lugar, int before) {
+        this.comboio = comboio;
+        this.carruagem = carruagem;
+        this.lugar = lugar;
+        this.before = before;
     }
 
-    public String getOption1() {
-        return option1;
+    public String getComboio() {
+        return comboio;
     }
 
-    public void setOption1(String option1) {
-        this.option1 = option1;
+    public void setComboio(String comboio) {
+        this.comboio = comboio;
     }
 
-    public String getOption2() {
-        return option2;
+    public String getCarruagem() {
+        return carruagem;
     }
 
-    public void setOption2(String option2) {
-        this.option2 = option2;
+    public void setCarruagem(String carruagem) {
+        this.carruagem = carruagem;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public void setBefore(int before) {
+        this.before = before;
+    }
+
+    public int getBefore() {
+        return before;
     }
 }
