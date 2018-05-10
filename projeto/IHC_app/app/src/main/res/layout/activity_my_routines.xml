@@ -11,8 +11,8 @@
     <ImageView
         android:id="@+id/add_icon"
         android:onClick="open_new_routine"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/add_blue"/>

@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    Globals global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +24,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_routines (View view){
-        Intent intent = new Intent (this, routineActivity.class);
-        startActivity(intent);
+        if( global.logged_in() ){
+            Intent intent = new Intent (this, routineActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Please Login to access this feature!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

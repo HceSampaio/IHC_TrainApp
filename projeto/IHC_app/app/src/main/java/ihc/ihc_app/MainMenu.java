@@ -17,11 +17,11 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        Globals global = (Globals)getApplication();
-
+        //Globals global = (Globals)getApplication();
+        Client client = Client.getInstance();
         TextView textElement = (TextView) findViewById(R.id.username);
         //textElement.setText("I love you"); //leave this line to assign a specific text
-        textElement.setText(global.get_user()); //leave this line to assign a string resource
+        textElement.setText(client.getName()); //leave this line to assign a string resource
 
     }
     public void open_routines (View view){

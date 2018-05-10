@@ -8,8 +8,14 @@ import android.app.Application;
 
 public class Globals extends Application {
 
+
     private String user_name;
     private String password;
+    private boolean logged_in;
+
+    public boolean logged_in(){
+        return logged_in;
+    }
 
     public String get_user(){
         return user_name;
