@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_routines (View view){
-        if( global.logged_in() ){
+        Client c = Client.getInstance();
+        if( c.logged_in() ){
             Intent intent = new Intent (this, routineActivity.class);
             startActivity(intent);
         }

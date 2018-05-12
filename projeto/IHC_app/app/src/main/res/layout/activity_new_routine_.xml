@@ -32,14 +32,15 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <TextView
+                <Spinner
                     android:id="@+id/cidade_partida"
                     android:layout_width="0dp"
                     android:layout_weight="4"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:padding="16dp"
                     android:textAlignment="center"
                     android:text="Partida" />
+
 
                 <ImageView
                     android:id="@+id/cidades_arrow"
@@ -48,11 +49,12 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:src="@drawable/ic_arrow_forward_black_24dp" />
-                <TextView
+
+                <Spinner
                     android:id="@+id/cidade_chegada"
                     android:layout_width="0dp"
                     android:layout_weight="4"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAlignment="center"
                     android:padding="16dp"
                     android:text="Chegada" />
@@ -70,6 +72,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:layout_weight="10"
         android:gravity="center"
         android:orientation="horizontal"
@@ -80,20 +83,22 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
-            app:cardUseCompatPadding="true"
+            app:cardUseCompatPadding="false"
             app:cardElevation="3dp"
-            app:cardCornerRadius="5dp">
+            app:cardCornerRadius="1dp">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
 
-                <TextView
+                <Spinner
                     android:id="@+id/cod_comboio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="16dp"
+                    android:textSize="16dp"
                     android:text="Comboio" />
 
             </LinearLayout>
@@ -105,34 +110,36 @@
             android:layout_width="0dp"
             android:layout_weight="7"
             android:layout_height="match_parent"
+            app:cardUseCompatPadding="false"
             app:cardElevation="2dp"
-            app:cardCornerRadius="5dp">
+            app:cardCornerRadius="1dp">
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:weightSum="10"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/hora_partida"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Spinner
+                    android:id="@+id/hora_comboio"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="match_parent"
                     android:padding="16dp"
+                    android:textSize="28dp"
                     android:text="Partida" />
 
-                <ImageView
-                    android:id="@+id/arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_arrow_forward_black_24dp" />
-                <TextView
-                    android:id="@+id/hora_chegada"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Chegada" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/arrow"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:padding="16dp"-->
+                    <!--android:src="@drawable/ic_arrow_forward_black_24dp" />-->
+
 
             </LinearLayout>
 
@@ -182,22 +189,108 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="7"
+            app:cardUseCompatPadding="true"
             app:cardElevation="3dp"
             app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:weightSum="10"
+                android:orientation="vertical">
 
-                <TextView
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:padding="0dp"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textStyle="italic"-->
+                    <!--android:text="Frequência"/>-->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center"
-                    android:text="Frequuencia"/>
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/Segunda"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Seg">
+
+                    </CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/Terca"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Ter" />
+                    <CheckBox
+                        android:id="@+id/Quarta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Qua" />
+                    <CheckBox
+                        android:id="@+id/Quinta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Qui" />
+                    <CheckBox
+                        android:id="@+id/Sexta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Sex" />
+                    <CheckBox
+                        android:id="@+id/Sabado"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Sab" />
+                    <CheckBox
+                        android:id="@+id/Domingo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableBottom="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center_horizontal|bottom"
+                        android:onClick="box_clicked"
+                        android:text="Dom" />
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -212,7 +305,7 @@
         android:id="@+id/row4"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:weightSum="10"
         android:orientation="horizontal">
@@ -250,6 +343,7 @@
             android:layout_weight="7"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            app:cardUseCompatPadding="true"
             app:cardElevation="3dp"
             app:cardCornerRadius="5dp">
 
@@ -266,7 +360,9 @@
                     android:padding="16dp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="Data"/>
+                    android:textStyle="italic"
+                    android:textSize="18dp"
+                    android:text="Abrir Calendário"/>
 
 
             </LinearLayout>
@@ -281,7 +377,7 @@
         android:id="@+id/row5"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:weightSum="10"
         android:orientation="horizontal">
@@ -317,22 +413,43 @@
             android:layout_width="0dp"
             android:layout_weight="7"
             android:layout_height="match_parent"
+            app:cardUseCompatPadding="true"
             app:cardElevation="3dp"
             app:cardCornerRadius="5dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/compra_num"
+                    android:layout_width="0dp"
+                    android:layout_weight="3.5"
                     android:layout_height="match_parent"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:text="Data"/>
+
+                <Spinner
+                    android:id="@+id/compra_tempo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Data"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_weight="3.5"
+                    android:text=" ANTES"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -342,6 +459,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
         android:weightSum="10"
         android:orientation="horizontal"
         android:gravity="center">
@@ -357,7 +477,7 @@
             android:layout_marginRight="50dp"
             android:layout_gravity="center_horizontal|center_vertical"
             app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
+            app:cardElevation="6dp"
             android:layout_margin="10dp"
             app:cardBackgroundColor="@android:color/white"
             >
@@ -376,7 +496,5 @@
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

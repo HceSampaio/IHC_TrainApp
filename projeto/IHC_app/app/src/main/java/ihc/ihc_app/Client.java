@@ -12,7 +12,7 @@ import java.util.List;
 public class Client {
 
     private List<Routine> routines = new ArrayList<>();
-    private String name;
+    private String name="";
     private String password;
     private List<Bilhete> bilhetes = new ArrayList<>();
     private static Client client = null;
@@ -26,7 +26,9 @@ public class Client {
         }
         return client;
     }
-
+    public boolean logged_in(){
+        return client.getName()=="";
+    }
     public List<Routine> getRoutines() {
         return routines;
     }

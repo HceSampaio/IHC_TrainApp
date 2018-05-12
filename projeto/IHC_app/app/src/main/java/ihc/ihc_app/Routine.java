@@ -1,18 +1,32 @@
 package ihc.ihc_app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by MSI on 10/05/2018.
  */
 
 public class Routine {
 
+
+    private String comboio;
     private String cidade_partida;
     private String cidade_chegada;
     private String hora_partida;
     private String hora_chegada;
-    private String[] repetir;//dias da semana que repete
+    private List<String> repetir = new ArrayList<>();//dias da semana que repete
     private String data_fim;
-    private int antecedencia;
+    private String antecedencia_num;
+    private String antecedencia_tempo;
+
+    public String getComboio() {
+        return comboio;
+    }
+
+    public void setComboio(String comboio) {
+        this.comboio = comboio;
+    }
 
     public String getCidade_partida() {
         return cidade_partida;
@@ -46,12 +60,16 @@ public class Routine {
         this.hora_chegada = hora_chegada;
     }
 
-    public String[] getRepetir() {
+    public List<String> getRepetir() {
         return repetir;
     }
 
-    public void setRepetir(String[] repetir) {
-        this.repetir = repetir;
+    public void addRepetir(String repetir) {
+        this.repetir.add(repetir);
+    }
+
+    public void removeRepetir(String repetir) {
+        this.repetir.remove(repetir);
     }
 
     public String getData_fim() {
@@ -62,11 +80,19 @@ public class Routine {
         this.data_fim = data_fim;
     }
 
-    public int getAntecedencia() {
-        return antecedencia;
+    public String getAntecedencia_num() {
+        return antecedencia_num;
     }
 
-    public void setAntecedencia(int antecedencia) {
-        this.antecedencia = antecedencia;
+    public void setAntecedencia_num(String antecedencia) {
+        this.antecedencia_num = antecedencia;
+    }
+
+    public String getAntecedencia_tempo() {
+        return antecedencia_tempo;
+    }
+
+    public void setAntecedencia_tempo(String antecedencia) {
+        this.antecedencia_tempo = antecedencia;
     }
 }
