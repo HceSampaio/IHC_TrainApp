@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void open_procura (View view){
+        Intent intent = new Intent (this, procurar_comboio.class);
+        startActivity(intent);
+    }
+
 }

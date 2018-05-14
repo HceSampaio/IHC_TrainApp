@@ -82,6 +82,10 @@ public class routineActivity extends AppCompatActivity {
 
             Toast.makeText(routineActivity.this, String.format("Item INSIDE : %d, parent: %d",adapter.getItemCount(),parentItemList.size()), Toast.LENGTH_LONG).show();
 
+            adapter = new MyAdapter(this,parentItemList); //meter conteudo dos pais e meter os filhos dentros dos pais
+            adapter.setParentClickableViewAnimationDefaultDuration();
+            adapter.setParentAndIconExpandOnClick(true);
+            recyclerView.setAdapter(adapter);
             //adapter.notifyItemInserted(adapter.getItemCount()-1);
             //adapter = new MyAdapter(this,parentItemList);
 
@@ -94,10 +98,7 @@ public class routineActivity extends AppCompatActivity {
 
              */
 
-
-
         }
-
 
     }
 
