@@ -26,6 +26,8 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
 
     Routine routine;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -292,11 +294,11 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        Data d = new Data(dayOfMonth,monthOfYear,year);
+        Data d = new Data(dayOfMonth,monthOfYear+1,year);
         routine.setData_fim(d.toString());
         TextView tv = (TextView) findViewById(R.id.fim_date);
         tv.setText(d.toString());
-        Toast.makeText(New_routine_Activity.this, String.format("Data de Fim da Rotina Alterada para %s)",d.toString()), Toast.LENGTH_LONG).show();
+        //Toast.makeText(New_routine_Activity.this, String.format("Data de Fim da Rotina Alterada para %s)",d.toString()), Toast.LENGTH_LONG).show();
     }
 
     public void box_clicked(View view){
@@ -304,75 +306,87 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
         switch(view.getId()) {
             case R.id.Segunda:
                 if (checked){
-                    routine.addRepetir("Segunda");
+                    routine.addRepetir("Seg");
                 }
-                // Put some meat on the sandwich
                 else{
-
-                    routine.removeRepetir("Segunda");
-                    break;
+                    routine.removeRepetir("Seg");
                 }
+                break;
             case R.id.Terca:
                 if (checked){
-                    routine.addRepetir("Terça");
+                    routine.addRepetir("Ter");
                 }
                 // Put some meat on the sandwich
                 else{
 
-                    routine.removeRepetir("Terça");
-                    break;
+                    routine.removeRepetir("Ter");
+
                 }
+                break;
             case R.id.Quarta:
                 if (checked){
-                    routine.addRepetir("Quarta");
+                    routine.addRepetir("Qua");
                 }
                 // Put some meat on the sandwich
                 else{
 
-                    routine.removeRepetir("Quarta");
-                    break;
+                    routine.removeRepetir("Qua");
+
                 }
+                break;
             case R.id.Quinta:
                 if (checked){
-                    routine.addRepetir("Quinta");
+                    routine.addRepetir("Qui");
                 }
                 // Put some meat on the sandwich
                 else{
 
-                    routine.removeRepetir("Quinta");
-                    break;
+                    routine.removeRepetir("Qui");
                 }
+                break;
             case R.id.Sexta:
                 if (checked){
-                    routine.addRepetir("Sexta");
+                    routine.addRepetir("Sex");
                 }
                 // Put some meat on the sandwich
                 else{
 
-                    routine.removeRepetir("Sexta");
-                    break;
+                    routine.removeRepetir("Sex");
                 }
+                break;
             case R.id.Sabado:
                 if (checked){
-                    routine.addRepetir("Sábado");
+                    routine.addRepetir("Sáb");
                 }
                 // Put some meat on the sandwich
                 else{
 
-                    routine.removeRepetir("Sábado");
-                    break;
+                    routine.removeRepetir("Sáb");
+
                 }
+                break;
             case R.id.Domingo:
                 if (checked){
-                    routine.addRepetir("Domingo");
+                    routine.addRepetir("Dom");
                 }
                 // Put some meat on the sandwich
                 else{
-                    routine.removeRepetir("Domingo");
-                    break;
+                    routine.removeRepetir("Dom");
                 }
+                break;
 
         }
     }
 
+    public void confirm_routine(View view){
+        if(routine.isComplete()) {
+
+            Client c = Client.getInstance();
+            c.addRoutines(routine);
+            this.finish();
+            //Toast.makeText(New_routine_Activity.this, "Routina Criada!", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(New_routine_Activity.this, "Por favor Preencher todos os campos", Toast.LENGTH_LONG).show();
+        }
+    }
 }

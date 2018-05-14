@@ -480,6 +480,7 @@
             app:cardElevation="6dp"
             android:layout_margin="10dp"
             app:cardBackgroundColor="@android:color/white"
+            android:onClick="confirm_routine"
             >
             <RelativeLayout
                 android:layout_width="match_parent"

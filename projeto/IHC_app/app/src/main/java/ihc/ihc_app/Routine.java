@@ -20,6 +20,11 @@ public class Routine {
     private String antecedencia_num;
     private String antecedencia_tempo;
 
+    public boolean isComplete(){
+        Routine r = this;
+        return r.data_fim!=null && r.comboio!= null && r.cidade_chegada!=null && r.cidade_partida!=null && r.hora_chegada!=null && r.hora_partida!=null && repetir!=null && antecedencia_num!=null && antecedencia_tempo!=null;
+    }
+
     public String getComboio() {
         return comboio;
     }
@@ -62,6 +67,14 @@ public class Routine {
 
     public List<String> getRepetir() {
         return repetir;
+    }
+
+    public String getRepetirAsString() {
+        String s = "";
+        for(int i=0;i<repetir.size();i++){
+            s+=repetir.get(i)+",";
+        }
+        return s.substring(0,s.length()-2);
     }
 
     public void addRepetir(String repetir) {

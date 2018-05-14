@@ -17,9 +17,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Hour"
+            android:id="@+id/Origem"
             android:padding="16dp"
             android:layout_toRightOf="@id/Destination"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/Hour"
+            android:padding="16dp"
+            android:layout_toRightOf="@id/Origem"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

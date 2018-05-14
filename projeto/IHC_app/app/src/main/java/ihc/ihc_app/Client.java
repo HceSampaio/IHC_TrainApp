@@ -36,6 +36,9 @@ public class Client {
     public void addRoutines(Routine routine) {
         this.routines.add(routine);
     }
+    public void removeRoutines(Routine r){
+        this.routines.remove(r);
+    }
 
     public List<Bilhete> getBilhetes() {
         return bilhetes;

@@ -10,10 +10,20 @@ public class TitleParent implements ParentObject{
     private List<Object> mChildrenList; //lista de filhos
     private UUID _id; //id
     private String destination; //Text
-    private String hours;
-    private String[] days;
+    private String origem; //Text
 
-    public TitleParent(String dest,String hours,String[] days) { //recebem texto para o seu titulo
+    public String getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(String origem) {
+        this.origem = origem;
+    }
+
+    private String hours;
+    private List<String> days;
+
+    public TitleParent(String dest,String hours,List<String> days) { //recebem texto para o seu titulo
         this.destination = dest;
         this.hours = hours;
         this.days = days;
@@ -28,14 +38,14 @@ public class TitleParent implements ParentObject{
         return hours;
     }
 
-    public String[] getDays() {
+    public List<String> getDays() {
         return days;
     }
 
     public String getDaysAsString() {
         String str = "";
-        for(int i=0;i<days.length;i++){
-            str += days[i] +",";
+        for(int i=0;i<days.size();i++){
+            str += days.get(i) +",";
         }
         str.substring(0,str.length()-2);
         return str;
@@ -57,7 +67,7 @@ public class TitleParent implements ParentObject{
         this.hours = hours;
     }
 
-    public void setDays(String[] days) {
+    public void setDays(List<String> days) {
         this.days = days;
     }
 

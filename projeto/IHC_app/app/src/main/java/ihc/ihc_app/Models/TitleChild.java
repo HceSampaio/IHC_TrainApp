@@ -5,14 +5,33 @@ public class TitleChild {
     public String comboio;
     public String carruagem;
     public String lugar;
-    public int before;
+
+    public String getBefore_num() {
+        return before_num;
+    }
+
+    public void setBefore_num(String before_num) {
+        this.before_num = before_num;
+    }
+
+    public String getBefore_tempo() {
+        return before_tempo;
+    }
+
+    public void setBefore_tempo(String before_tempo) {
+        this.before_tempo = before_tempo;
+    }
+
+    public String before_num;
+    public String before_tempo;
 
 
-    public TitleChild(String comboio, String carruagem, String lugar, int before) {
+    public TitleChild(String comboio, String carruagem, String lugar, String before_num, String before_tempo) {
         this.comboio = comboio;
         this.carruagem = carruagem;
         this.lugar = lugar;
-        this.before = before;
+        this.before_num = before_num;
+        this.before_tempo = before_tempo;
     }
 
     public String getComboio() {
@@ -39,11 +58,5 @@ public class TitleChild {
         this.lugar = lugar;
     }
 
-    public void setBefore(int before) {
-        this.before = before;
-    }
 
-    public int getBefore() {
-        return before;
-    }
 }

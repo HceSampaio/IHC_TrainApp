@@ -53,7 +53,7 @@ public class MyAdapter extends ExpandableRecyclerAdapter<MyParentViewHolder,MyCh
         titleChildViewHolder.comboio.setText("COMBOIO :"+title.getComboio());
         titleChildViewHolder.carruagem.setText("CARRUAGEM :"+title.getCarruagem());
         titleChildViewHolder.lugar.setText("LUGAR :"+title.getLugar());
-        titleChildViewHolder.before.setText("ANTECENDENCIA :"+title.getBefore()+" min");
+        titleChildViewHolder.before.setText("ANTECENDENCIA :"+title.getBefore_num()+" "+title.getBefore_tempo());
 
     }
 }
