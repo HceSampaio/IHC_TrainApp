@@ -122,20 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-    /*
-        Field[] fields = R.array.class.getFields();
-        String[] estacoes = new String[fields.length];
-        for (int i = 0x7f030000; i < 0x7f030013; i++) {
-            String[] coord = getResources().getStringArray(i);
-            float x = Float.parseFloat(coord[0]);
-            float y = Float.parseFloat(coord[1]);
-            Log.d("ESTACAO","x:"+x+",y:"+y);
-        }
-*/
-        getResources().getStringArray(R.array.Aveiro);
-        // Add a marker in Sydney and move the camera
         LatLng aveiro = new LatLng(40.64527893, -8.63984108);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         loadMarkers();
         mMap.moveCamera(CameraUpdateFactory.newLatLng(aveiro));
     }
