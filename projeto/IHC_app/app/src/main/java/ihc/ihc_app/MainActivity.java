@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void open_maps (View view) {
+        Intent intent = new Intent (this, MapsActivity.class);
+        startActivity(intent);
+    }
+
 }
