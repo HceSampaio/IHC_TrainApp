@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical"
+    tools:context="ihc.ihc_app.procurar_comboio">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1.5">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cidades_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/l_blue">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <Spinner
+                    android:id="@+id/cidade_partida"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:textAlignment="center"
+                    android:text="Partida" />
+
+
+                <ImageView
+                    android:id="@+id/cidades_arrow"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+                <Spinner
+                    android:id="@+id/cidade_chegada"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:padding="16dp"
+                    android:text="Chegada" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/fim_date_card"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:textSize="16dp"
+                    android:textAlignment="center"
+                    android:text="DATA :"/>
+
+                <TextView
+                    android:id="@+id/fim_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="7.5"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textStyle="italic"
+                    android:textSize="18dp"
+                    android:text="Abrir Calendário"/>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:onClick="search"
+            android:src="@drawable/ic_youtube_searched_for_black_24dp"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="7">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:backgroundTint="@android:color/darker_gray"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="5dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/bilhetesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+
+            </ScrollView>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
