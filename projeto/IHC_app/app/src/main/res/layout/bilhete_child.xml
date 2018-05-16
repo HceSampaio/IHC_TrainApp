@@ -38,6 +38,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/edit_card"
+                android:onClick="selectSeat"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent"
@@ -79,11 +80,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:onClick="comprar_bilhete"
                     app:cardUseCompatPadding="true"
                     app:cardElevation="3dp"
                     app:cardCornerRadius="5dp"
                     android:layout_weight="0.20">
+        <!--android:onClick="comprar_bilhete"-->
 
                     <TextView
                         android:id="@+id/compra_btn"

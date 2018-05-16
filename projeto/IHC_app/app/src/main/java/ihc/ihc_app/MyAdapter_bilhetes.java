@@ -23,6 +23,11 @@ import ihc.ihc_app.ViewHolders.BilhetesParentViewHolder;
 public class MyAdapter_bilhetes extends ExpandableRecyclerAdapter<BilhetesParentViewHolder,BilhetesChildViewHolder> {
 
     LayoutInflater inflater;
+    private String comboio;
+    private int i1,i2;
+    private String hora;
+    private double preco;
+    private String carruagem,lugar;
 
     public MyAdapter_bilhetes(Context context, List<ParentObject> parentItemList) {
         super(context, parentItemList);
@@ -46,17 +51,26 @@ public class MyAdapter_bilhetes extends ExpandableRecyclerAdapter<BilhetesParent
         BilheteParent title = (BilheteParent) o;
         titleParentViewHolder._textViewComboio.setText(title.getComboio());
         titleParentViewHolder._textViewHora.setText(title.getHora());
-
-
+        comboio = title.getComboio();
+        hora = title.getHora();
+        i1 = i;
     }
 
     @Override
     public void onBindChildViewHolder(BilhetesChildViewHolder titleChildViewHolder, int i, Object o) {
         BilheteChild title = (BilheteChild)o;
-        titleChildViewHolder.carruagem.setText("CARRUAGEM :"+title.getCarruagem());
-        titleChildViewHolder.lugar.setText("LUGAR :"+title.getLugar());
-        titleChildViewHolder.preco.setText("PREÇO :"+title.getPreco());
 
+        titleChildViewHolder.carruagem.setText("CARRUAGEM: "+title.getCarruagem());
+        titleChildViewHolder.lugar.setText("LUGAR: "+title.getLugar());
+        titleChildViewHolder.preco.setText("PREÇO: "+title.getPreco());
+        carruagem = title.getCarruagem();
+        lugar = title.getLugar();
+        preco = Double.parseDouble(title.getPreco().split(" ")[0]);
+        i2 = i;
+    }
+
+    public String getAtt(){
+        return comboio + " " + hora + " " + preco + " C"+carruagem + " " + lugar + " i1: "+i1+" i2: "+i2;
     }
 }
 

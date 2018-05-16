@@ -12,7 +12,6 @@ import java.util.List;
 
 import ihc.ihc_app.Models.TitleChild;
 import ihc.ihc_app.Models.TitleParent;
-import ihc.ihc_app.R;
 import ihc.ihc_app.ViewHolders.MyChildViewHolder;
 import ihc.ihc_app.ViewHolders.MyParentViewHolder;
 
@@ -50,10 +49,10 @@ public class MyAdapter extends ExpandableRecyclerAdapter<MyParentViewHolder,MyCh
     @Override
     public void onBindChildViewHolder(MyChildViewHolder titleChildViewHolder, int i, Object o) {
         TitleChild title = (TitleChild)o;
-        titleChildViewHolder.comboio.setText("COMBOIO :"+title.getComboio());
-        titleChildViewHolder.carruagem.setText("CARRUAGEM :"+title.getCarruagem());
-        titleChildViewHolder.lugar.setText("LUGAR :"+title.getLugar());
-        titleChildViewHolder.before.setText("ANTECENDENCIA :"+title.getBefore_num()+" "+title.getBefore_tempo());
+        titleChildViewHolder.comboio.setText("COMBOIO: "+title.getComboio());
+        titleChildViewHolder.carruagem.setText("CARRUAGEM: "+title.getCarruagem());
+        titleChildViewHolder.lugar.setText("LUGAR: "+title.getLugar());
+        titleChildViewHolder.before.setText("ANTECENDENCIA: "+title.getBefore_num()+" "+title.getBefore_tempo());
 
     }
 }

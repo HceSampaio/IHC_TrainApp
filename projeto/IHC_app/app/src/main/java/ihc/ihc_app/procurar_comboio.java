@@ -1,51 +1,55 @@
 package ihc.ihc_app;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
-import ihc.ihc_app.Models.BilheteParent;
-import ihc.ihc_app.Models.BilheteChild;
 import ihc.ihc_app.MyAdapters.MyArrayAdapter;
 
-public class procurar_comboio extends AppCompatActivity implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener{
+public class procurar_comboio extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private String partida,chegada;
+    private String comboio;
+    private String hora;
+    private double preco;
     private Data data;
+    private int lastExpanded;
 
-    RecyclerView recyclerView;
-    MyAdapter_bilhetes adapter;
-    List<ParentObject> parentItemList;
+    private ExpandableListView listView;
+    private ExpandableListAdapter listAdapter;
+    private List<List<String>> listHeaders;
+    private HashMap<List<String>,List<List<String>>> listHash;
 
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        ((MyAdapter_bilhetes)recyclerView.getAdapter()).onSaveInstanceState(outState);
-    }
+    private ViewGroup bilheteEscolhido;
+
+    int carruagemEscolhida;
+    int lugarEscolhido;
+
+    private Bilhete currentBilhete;
+    private Bilhete bilheteComprar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurar_comboio);
 
-
-        recyclerView = (RecyclerView)findViewById(R.id.bilhetesRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
+        listView = (ExpandableListView)findViewById(R.id.lvExp);
 
         List<String> cidades_partida = new ArrayList<>();
         cidades_partida.add("PARTIDA");
@@ -142,6 +146,83 @@ public class procurar_comboio extends AppCompatActivity implements com.wdullaer.
 
     }
 
+    private void initData(){
+        String comboio, hora, carruagem, lugar, preco;
+        listHeaders = new ArrayList<>();
+        listHash = new HashMap<>();
+
+        if(partida == "Aveiro"){
+            comboio = "IC786";
+            hora = "16:20";
+            carruagem = "4";
+            lugar = "26";
+            preco = "22 Euros";
+            List<String> tmp = new ArrayList<>();
+            tmp.add(comboio);
+            tmp.add(hora);
+            listHeaders.add(tmp);
+            List<String> tmp1 = new ArrayList<>();
+            tmp1.add(carruagem);
+            tmp1.add(lugar);
+            tmp1.add(preco);
+            List<List<String>> zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
+        }
+        else {
+            comboio = "IC123";
+            hora = "12:40";
+            carruagem = "7";
+            lugar = "48";
+            preco = "35 Euros";
+            List<String> tmp = new ArrayList<>();
+            tmp.add(comboio);
+            tmp.add(hora);
+            listHeaders.add(tmp);
+            List<String> tmp1 = new ArrayList<>();
+            tmp1.add(carruagem);
+            tmp1.add(lugar);
+            tmp1.add(preco);
+            List<List<String>> zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
+
+            comboio = "IC666";
+            hora = "12:55";
+            carruagem = "3";
+            lugar = "2";
+            preco = "69 Euros";
+            tmp = new ArrayList<>();
+            tmp.add(comboio);
+            tmp.add(hora);
+            listHeaders.add(tmp);
+            tmp1 = new ArrayList<>();
+            tmp1.add(carruagem);
+            tmp1.add(lugar);
+            tmp1.add(preco);
+            zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
+
+            comboio = "IC111";
+            hora = "11:22";
+            carruagem = "3";
+            lugar = "2";
+            preco = "12 Euros";
+            tmp = new ArrayList<>();
+            tmp.add(comboio);
+            tmp.add(hora);
+            listHeaders.add(tmp);
+            tmp1 = new ArrayList<>();
+            tmp1.add(carruagem);
+            tmp1.add(lugar);
+            tmp1.add(preco);
+            zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
+        }
+    }
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Data d = new Data(dayOfMonth,monthOfYear+1,year);
@@ -152,72 +233,55 @@ public class procurar_comboio extends AppCompatActivity implements com.wdullaer.
     }
 
     public void search(View view){
+        initData();
+        listAdapter = new ExpandableListAdapter(this,listHeaders,listHash);
+        listView.setAdapter(listAdapter);
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id){
+                Log.d("CLICKER","group "+groupPosition+", child "+childPosition);
+                List<String> group = (List<String>)listAdapter.getGroup(groupPosition);
+                String comboio = group.get(0);
+                String hora = group.get(1);
 
-        parentItemList = initData();
-        adapter = new MyAdapter_bilhetes(this,parentItemList); //meter conteudo dos pais e meter os filhos dentros dos pais
-        adapter.setParentClickableViewAnimationDefaultDuration();
-        adapter.setParentAndIconExpandOnClick(true);
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    private List<ParentObject> initData() {
-
-        List<ParentObject> parent_array = new ArrayList<>();
-
-        //parametros de uma rotina
-        BilheteParent parent = null;
-        List<Object> childList;
-        BilheteChild child;
-
-        String comboio,hora;
-        String carruagem,lugar,preço;
-
-        if(partida == "Aveiro"){
-            for (int i = 0; i < 5; i++) {
-
-                comboio = "IC786";
-                hora = "16:20";
-                carruagem = "4";
-                lugar = "26";
-                preço = "22 Euros";
-                parent = new BilheteParent(comboio, hora);
-
-                childList = new ArrayList<>();
-
-                child = new BilheteChild(carruagem, lugar, preço);
-                childList.add(child);
-
-                parent.setChildObjectList(childList);
-                parent_array.add(parent);
-
+                List<List<String>> child = (List<List<String>>)listAdapter.getChild(groupPosition,0);
+                String carruagem = child.get(0).get(0);
+                String lugar = child.get(0).get(1);
+                double preco = Double.parseDouble(child.get(0).get(2).split(" ")[0]);
+                currentBilhete = new Bilhete(comboio, carruagem, null, hora, null, preco, lugar);
+                Log.d("BILHETE",currentBilhete.toString());
+                return false;
             }
-        }
-        else {
-            for (int i = 0; i < 5; i++) {
-
-                comboio = "IC123";
-                hora = "12:40";
-                carruagem = "7";
-                lugar = "48";
-                preço = "35 Euros";
-                parent = new BilheteParent(comboio, hora);
-
-                childList = new ArrayList<>();
-
-                child = new BilheteChild(carruagem, lugar, preço);
-                childList.add(child);
-
-                parent.setChildObjectList(childList);
-                parent_array.add(parent);
-
+        });
+        listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int i) {
+                if(lastExpanded != -1 && i != lastExpanded){
+                    listView.collapseGroup(lastExpanded);
+                }
+                lastExpanded = i;
             }
+        });
+    }
+
+    public void selectSeat(View view){
+        Intent intent = new Intent (this, escolherLugares.class);
+        startActivityForResult(intent, 1); // if reqCode >= 0, é devolvido quando a activity termina
+        bilheteEscolhido = (ViewGroup)view.getParent();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == 1 && resultCode == RESULT_OK && data != null){
+            carruagemEscolhida = data.getIntExtra("carruagem", 1);
+            lugarEscolhido = data.getIntExtra("lugar", 0);
+
+            TextView carruagem = (TextView)bilheteEscolhido.getChildAt(0);
+            TextView lugar = (TextView)bilheteEscolhido.getChildAt(1);
+            carruagem.setText("CARRUAGEM: "+carruagemEscolhida);
+            lugar.setText("LUGAR: "+lugarEscolhido);
+            Toast.makeText(this, "Lugar alterado com sucesso!", Toast.LENGTH_SHORT).show();
         }
-
-        return parent_array;
-
     }
-    public void comprar_bilhete(View view){
 
-    }
 }

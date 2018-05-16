@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#afd3e1</color>
     <color name="l_blue">#afd3e1</color>
+    <color name="seat_selected">#22aa22</color>
+    <color name="seat_taken">#ffcccc</color>
+    <color name="seat_free">#c6ffc6</color>
 </resources>

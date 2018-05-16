@@ -1,17 +1,11 @@
 package ihc.ihc_app;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
@@ -19,7 +13,6 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import ihc.ihc_app.MyAdapter;
 import ihc.ihc_app.Models.TitleChild;
 import ihc.ihc_app.Models.TitleParent;
 
@@ -33,7 +26,7 @@ public class routineActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        ((MyAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
+        //((MyAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
     }
     @Override
     protected void onResume(){

@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void open_login (View view){
@@ -41,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void open_procura (View view){
         Intent intent = new Intent (this, procurar_comboio.class);
+        startActivity(intent);
+    }
+
+    public void test_lugares (View view) {
+        Intent intent = new Intent (this, escolherLugares.class);
         startActivity(intent);
     }
 
