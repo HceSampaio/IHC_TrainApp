@@ -75,6 +75,7 @@
         android:padding="16dp">
 
         <android.support.v7.widget.CardView
+            app:cardBackgroundColor="@android:color/transparent"
             android:onClick="open_routines"
             android:layout_height="0dp"
             android:layout_width="0dp"
@@ -183,7 +184,8 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:onClick="test_lugares"
+            app:cardBackgroundColor="@android:color/transparent"
+            android:onClick="open_bilhetes"
             android:layout_height="0dp"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
@@ -202,18 +204,19 @@
                 android:layout_gravity="center_horizontal|center_vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_train_black_24dp"/>
+                    android:src="@drawable/ticket" />
 
                 <TextView
-                    android:text="testeLugares"
+                    android:text="Meus Bilhetes"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>

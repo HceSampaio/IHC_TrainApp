@@ -147,19 +147,21 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
     }
 
     private void initData(){
-        String comboio, hora, carruagem, lugar, preco;
+        String comboio, hora, horachegada, carruagem, lugar, preco;
         listHeaders = new ArrayList<>();
         listHash = new HashMap<>();
 
         if(partida == "Aveiro"){
             comboio = "IC786";
             hora = "16:20";
-            carruagem = "4";
-            lugar = "26";
+            horachegada = "17:52";
+            carruagem = "CARRUAGEM: 4";
+            lugar = "LUGAR: 26";
             preco = "22 Euros";
             List<String> tmp = new ArrayList<>();
             tmp.add(comboio);
             tmp.add(hora);
+            tmp.add(horachegada);
             listHeaders.add(tmp);
             List<String> tmp1 = new ArrayList<>();
             tmp1.add(carruagem);
@@ -172,12 +174,14 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
         else {
             comboio = "IC123";
             hora = "12:40";
-            carruagem = "7";
-            lugar = "48";
+            horachegada = "13:48";
+            carruagem = "CARRUAGEM: 7";
+            lugar = "LUGAR: 48";
             preco = "35 Euros";
             List<String> tmp = new ArrayList<>();
             tmp.add(comboio);
             tmp.add(hora);
+            tmp.add(horachegada);
             listHeaders.add(tmp);
             List<String> tmp1 = new ArrayList<>();
             tmp1.add(carruagem);
@@ -189,12 +193,14 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
 
             comboio = "IC666";
             hora = "12:55";
-            carruagem = "3";
-            lugar = "2";
+            horachegada = "13:59";
+            carruagem = "CARRUAGEM: 3";
+            lugar = "LUGAR: 2";
             preco = "69 Euros";
             tmp = new ArrayList<>();
             tmp.add(comboio);
             tmp.add(hora);
+            tmp.add(horachegada);
             listHeaders.add(tmp);
             tmp1 = new ArrayList<>();
             tmp1.add(carruagem);
@@ -206,12 +212,14 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
 
             comboio = "IC111";
             hora = "11:22";
-            carruagem = "3";
-            lugar = "2";
+            horachegada = "12:40";
+            carruagem = "CARRUAGEM: 3";
+            lugar = "LUGAR: 2";
             preco = "12 Euros";
             tmp = new ArrayList<>();
             tmp.add(comboio);
             tmp.add(hora);
+            tmp.add(horachegada);
             listHeaders.add(tmp);
             tmp1 = new ArrayList<>();
             tmp1.add(carruagem);
@@ -235,21 +243,48 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
     public void search(View view){
         initData();
         listAdapter = new ExpandableListAdapter(this,listHeaders,listHash);
+        if (partida == null){
+            Toast.makeText(this, "Escolha uma estação de partida.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (chegada == null){
+            Toast.makeText(this, "Escolha uma estação de chegada.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (data == null){
+            Toast.makeText(this, "Escolha uma data.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         listView.setAdapter(listAdapter);
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id){
-                Log.d("CLICKER","group "+groupPosition+", child "+childPosition);
+                // COMPRA DE BILHETE
                 List<String> group = (List<String>)listAdapter.getGroup(groupPosition);
                 String comboio = group.get(0);
                 String hora = group.get(1);
+                String horachegada = group.get(2);
 
                 List<List<String>> child = (List<List<String>>)listAdapter.getChild(groupPosition,0);
-                String carruagem = child.get(0).get(0);
-                String lugar = child.get(0).get(1);
+                ViewGroup linearLayout1 = (ViewGroup)((ViewGroup)v).getChildAt(0);
+                ViewGroup linearLayout2 = (ViewGroup)((ViewGroup)linearLayout1).getChildAt(0);
+                TextView car = (TextView)linearLayout2.getChildAt(0);
+                TextView lug = (TextView)linearLayout2.getChildAt(1);
+                String carruagem = car.getText().toString();
+                String lugar = lug.getText().toString();
+
                 double preco = Double.parseDouble(child.get(0).get(2).split(" ")[0]);
-                currentBilhete = new Bilhete(comboio, carruagem, null, hora, null, preco, lugar);
-                Log.d("BILHETE",currentBilhete.toString());
+                currentBilhete = new Bilhete(comboio, carruagem, lugar, chegada, partida, horachegada, hora, data, preco);
+                Log.d("BILHETE",currentBilhete.toString() + "......preco:"+child.get(0).get(2));
+
+                Client c = Client.getInstance();
+                if (c.logged_in()){
+                    c.addBilhetes(currentBilhete);
+                    parent.collapseGroup(groupPosition);
+                    Toast.makeText(parent.getContext(), "Bilhete comprado com sucesso!", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(parent.getContext(), "Inicie sessão para comprar um bilhete.", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
@@ -282,6 +317,10 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
             lugar.setText("LUGAR: "+lugarEscolhido);
             Toast.makeText(this, "Lugar alterado com sucesso!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void empty (View v){
+        // does nothing
     }
 
 }

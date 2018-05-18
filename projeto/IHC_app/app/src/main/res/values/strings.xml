@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Train Application</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="app_name">Train App</string>
+    <string name="title_activity_login">Iniciar sessão</string>
     <string-array name="estacoes">
         <item>Aveiro</item>
         <item>Porto</item>
@@ -10,23 +10,25 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="prompt_password">Password (opcional)</string>
+    <string name="action_sign_in">Iniciar sessão</string>
+    <string name="action_sign_in_short">Iniciar sessão</string>
+    <string name="error_invalid_email">Endereço de email inválido</string>
+    <string name="error_invalid_password">Password inválida</string>
+    <string name="error_incorrect_password">Password incorreta</string>
+    <string name="error_field_required">Campo necessário</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="title_activity_lugar_">Lugar_Activity</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Definições</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="username"></string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="title_activity_procurar">Consultar comboios</string>
+    <string name="title_activity_escolherlugar">Escolher lugar</string>
     <string name="prompt_mapa">Escolha uma estação</string>
 
     <string name="leftArrow">&#60;</string>

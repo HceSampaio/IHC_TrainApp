@@ -20,16 +20,17 @@
             app:cardCornerRadius="5dp">
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="12dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
 
                 <TextView
                     android:id="@+id/comboio"
                     android:layout_width="0dp"
                     android:layout_weight="3"
+                    android:gravity="center"
                     android:layout_height="match_parent"
                     android:textSize="18dp"
                     android:textAlignment="center"
@@ -38,11 +39,30 @@
                 <TextView
                     android:id="@+id/hora"
                     android:layout_width="0dp"
-                    android:layout_weight="7"
+                    android:layout_weight="2.5"
+                    android:gravity="center"
                     android:layout_height="match_parent"
                     android:textAlignment="center"
                     android:textSize="18dp"
-                    android:text=" 12:30 - 15:25"/>
+                    android:text="12:30"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_arrow_forward_black_24dp" />
+                <TextView
+                    android:id="@+id/horachegada"
+                    android:layout_width="0dp"
+                    android:layout_weight="2.5"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:text="15:25"/>
+
+
+
 
             </LinearLayout>
 

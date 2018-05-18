@@ -143,7 +143,6 @@
             android:layout_weight="7"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:backgroundTint="@android:color/darker_gray"
             app:cardElevation="3dp"
             app:cardCornerRadius="5dp">
 

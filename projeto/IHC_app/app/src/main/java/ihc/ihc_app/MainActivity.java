@@ -23,14 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_routines (View view){
-        Client c = Client.getInstance();
-        if( c.logged_in() ){
-            Intent intent = new Intent (this, routineActivity.class);
-            startActivity(intent);
-        }
-        else{
-            Toast.makeText(MainActivity.this, "Please Login to access this feature!", Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(MainActivity.this, "Esta funcionalidade requer início de sessão.", Toast.LENGTH_SHORT).show();
     }
 
     public void open_maps (View view) {
@@ -43,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void test_lugares (View view) {
-        Intent intent = new Intent (this, escolherLugares.class);
-        startActivity(intent);
+    public void open_bilhetes (View view) {
+        Toast.makeText(MainActivity.this, "Esta funcionalidade requer início de sessão.", Toast.LENGTH_SHORT).show();
     }
 
 }

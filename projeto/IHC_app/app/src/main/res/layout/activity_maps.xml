@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum="10"
     android:background="@drawable/bg"
-    tools:context="ihc.ihc_app.MainActivity"
+    tools:context="ihc.ihc_app.MapsActivity"
     android:orientation="vertical">
 
     <Spinner
@@ -23,6 +23,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         map:cameraZoom="16"
-        map:mapType="normal"
-        tools:context=".MapsActivity" />
+        map:mapType="normal"/>
 </LinearLayout>

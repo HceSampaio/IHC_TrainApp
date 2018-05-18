@@ -1,7 +1,5 @@
 package ihc.ihc_app;
 
-import android.view.accessibility.AccessibilityEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class Client {
         return client;
     }
     public boolean logged_in(){
-        return client.getName()=="";
+        return client.getName()!="";
     }
     public List<Routine> getRoutines() {
         return routines;

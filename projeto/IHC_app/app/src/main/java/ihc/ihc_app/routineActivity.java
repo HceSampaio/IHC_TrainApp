@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 
@@ -35,9 +34,6 @@ public class routineActivity extends AppCompatActivity {
 
         Client c = Client.getInstance();
         List<Routine> routines = c.getRoutines();
-
-        Toast.makeText(routineActivity.this, String.format("Item count : %d, routines: %d",adapter.getItemCount(),routines.size()), Toast.LENGTH_LONG).show();
-
 
         if(adapter.getItemCount()-1 < routines.size()){
 
@@ -72,8 +68,6 @@ public class routineActivity extends AppCompatActivity {
             parent.setChildObjectList(childList);//lista de filhos de parent = childlist
 
             parentItemList.add(parent);
-
-            Toast.makeText(routineActivity.this, String.format("Item INSIDE : %d, parent: %d",adapter.getItemCount(),parentItemList.size()), Toast.LENGTH_LONG).show();
 
             adapter = new MyAdapter(this,parentItemList); //meter conteudo dos pais e meter os filhos dentros dos pais
             adapter.setParentClickableViewAnimationDefaultDuration();

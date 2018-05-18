@@ -10,12 +10,12 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class BilhetesExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<List<String>> listHeaders;
     private HashMap<List<String>,List<List<String>>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<List<String>> listHeaders, HashMap<List<String>, List<List<String>>> listHashMap) {
+    public BilhetesExpandableListAdapter(Context context, List<List<String>> listHeaders, HashMap<List<String>, List<List<String>>> listHashMap) {
         this.context = context;
         this.listHeaders = listHeaders;
         this.listHashMap = listHashMap;
@@ -61,16 +61,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         List<String> headerTitle = (List<String>)getGroup(i);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.bilhete_parent, null);
+            view = inflater.inflate(R.layout.mybilhete_parent, null);
         }
-        TextView comboio = (TextView)view.findViewById(R.id.comboio);
+        TextView comboio = (TextView)view.findViewById(R.id.bilhete_comboio);
+        TextView cidade_partida = (TextView)view.findViewById(R.id.bilhete_cidade);
+        TextView cidade_chegada = (TextView)view.findViewById(R.id.bilhete_cidadechegada);
+        TextView hora_partida = (TextView)view.findViewById(R.id.bilhete_hora);
+        TextView hora_chegada = (TextView)view.findViewById(R.id.bilhete_horachegada);
+
         comboio.setText(headerTitle.get(0));
+        cidade_partida.setText(headerTitle.get(1));
+        cidade_chegada.setText(headerTitle.get(2));
+        hora_partida.setText(headerTitle.get(3));
+        hora_chegada.setText(headerTitle.get(4));
 
-        TextView hora = (TextView)view.findViewById(R.id.hora);
-        hora.setText(headerTitle.get(1));
-
-        TextView horachegada = (TextView)view.findViewById(R.id.horachegada);
-        horachegada.setText(headerTitle.get(2));
         return view;
     }
 
@@ -79,11 +83,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         List<List<String>> childText = (List<List<String>>)getChild(i,i1);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.bilhete_child, null);
+            view = inflater.inflate(R.layout.mybilhete_child, null);
         }
-        TextView carruagem = (TextView)view.findViewById(R.id.carruagem);
-        TextView lugar = (TextView)view.findViewById((R.id.lugar));
-        TextView preco = (TextView)view.findViewById(R.id.preco);
+        TextView carruagem = (TextView)view.findViewById(R.id.bilhete_carruagem);
+        TextView lugar = (TextView)view.findViewById(R.id.bilhete_lugar);
+        TextView preco = (TextView)view.findViewById(R.id.bilhete_preco);
         carruagem.setText(childText.get(i1).get(0));
         lugar.setText(childText.get(i1).get(1));
         preco.setText(childText.get(i1).get(2));

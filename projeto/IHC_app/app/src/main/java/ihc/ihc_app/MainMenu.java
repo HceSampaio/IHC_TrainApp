@@ -2,13 +2,10 @@ package ihc.ihc_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -24,9 +21,35 @@ public class MainMenu extends AppCompatActivity {
         textElement.setText(client.getName()); //leave this line to assign a string resource
 
     }
+
     public void open_routines (View view){
-        Intent intent = new Intent (this, routineActivity.class);
+        Client c = Client.getInstance();
+        if( c.logged_in() ){
+            Intent intent = new Intent (this, routineActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(MainMenu.this, "Please Login to access this feature!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void open_maps (View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
+    }
+
+    public void open_procura (View view){
+        Intent intent = new Intent (this, procurar_comboio.class);
+        startActivity(intent);
+    }
+
+    public void open_bilhetes (View view) {
+        Intent intent = new Intent (this, BilhetesActivity.class);
+        startActivity(intent);
+    }
+
+    public void logout (View view){
+
     }
 
 }

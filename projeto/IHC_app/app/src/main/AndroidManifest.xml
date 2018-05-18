@@ -22,7 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,18 +47,18 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".routineActivity"
-            android:screenOrientation="portrait"
             android:label="My Routines"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ihc.ihc_app.MainMenu" />
         </activity>
         <activity
             android:name=".New_routine_Activity"
-            android:screenOrientation="portrait"
             android:label="New Routine"
-            android:parentActivityName=".routineActivity">
+            android:parentActivityName=".routineActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ihc.ihc_app.routineActivity" />
@@ -75,10 +77,41 @@
 
         <activity
             android:name=".MapsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".procurar_comboio" android:screenOrientation="portrait" />
-        <activity android:name=".escolherLugares" android:screenOrientation="portrait"></activity>
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="ihc.ihc_app.MainMenu" />
+        </activity>
+
+        <activity
+            android:name=".procurar_comboio"
+            android:label="@string/title_activity_procurar"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ihc.ihc_app.MainMenu" />
+        </activity>
+        <activity
+            android:name=".escolherLugares"
+            android:label="@string/title_activity_escolherlugar"
+            android:parentActivityName=".procurar_comboio"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ihc.ihc_app.procurar_comboio" />
+        </activity>
+
+        <activity android:name=".BilhetesActivity"
+            android:label="Meus Bilhetes"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="ihc.ihc_app.MainMenu" />
+        </activity>
     </application>
 
 </manifest>

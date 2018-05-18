@@ -7,8 +7,7 @@ package ihc.ihc_app;
 public class Bilhete {
 
     private String comboio;
-    private String carruagem;
-    private int lugar;
+    private int lugar, carruagem;
     private int linha;
     private String estacao_chegada;
     private String estacao_partida;
@@ -17,26 +16,25 @@ public class Bilhete {
     private Data data;
     private double preco;
 
-    public Bilhete(String comboio, String carruagem, String estacao_chegada, String estacao_partida, String hora_chegada, String hora_partida, Data d, double preco) {
+    public Bilhete(String comboio, String carruagem, String lugar, String estacao_chegada, String estacao_partida, String hora_chegada, String hora_partida, Data d, double preco) {
         this.comboio = comboio;
-        this.carruagem = carruagem;
         this.estacao_chegada = estacao_chegada;
         this.estacao_partida = estacao_partida;
         this.hora_chegada = hora_chegada;
         this.hora_partida = hora_partida;
-        this.preco = preco;
         this.data = d;
-    }
+        if (lugar.contains(" ")){
+            this.lugar = Integer.parseInt(lugar.split(" ")[1]);
+        }else{
+            this.lugar = Integer.parseInt(lugar);
+        }
 
-    public Bilhete(String comboio, String carruagem, String hora_chegada, String hora_partida, Data data, double preco, String lugar) {
-        this.comboio = comboio;
-        this.carruagem = carruagem;
-        this.linha = linha;
-        this.hora_chegada = hora_chegada;
-        this.hora_partida = hora_partida;
-        this.data = data;
+        if(carruagem.contains(" ")){
+            this.carruagem = Integer.parseInt(carruagem.split(" ")[1]);
+        }else{
+            this.carruagem = Integer.parseInt(carruagem);
+        }
         this.preco = preco;
-        this.lugar = Integer.parseInt(lugar);
     }
 
     public String getComboio() {
@@ -47,11 +45,11 @@ public class Bilhete {
         this.comboio = comboio;
     }
 
-    public String getCarruagem() {
+    public int getCarruagem() {
         return carruagem;
     }
 
-    public void setCarruagem(String carruagem) {
+    public void setCarruagem(int carruagem) {
         this.carruagem = carruagem;
     }
 
@@ -101,6 +99,10 @@ public class Bilhete {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public int getLugar(){
+        return lugar;
     }
 
     @Override
