@@ -23,11 +23,11 @@
     <string name="title_activity_lugar_">Lugar_Activity</string>
     <string name="action_settings">Definições</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_main2">@string/app_name</string>
+    <string name="title_activity_main_menu">@string/app_name</string>
     <string name="username"></string>
     <string name="title_activity_maps">Mapa</string>
-    <string name="title_activity_procurar">Consultar comboios</string>
+    <string name="title_activity_procurar">Horários / Compra de bilhetes</string>
     <string name="title_activity_escolherlugar">Escolher lugar</string>
     <string name="prompt_mapa">Escolha uma estação</string>
 

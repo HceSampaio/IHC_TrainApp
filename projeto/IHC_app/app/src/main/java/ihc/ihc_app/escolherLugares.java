@@ -32,6 +32,26 @@ public class escolherLugares extends AppCompatActivity {
         lugaresOcupados.put(2,new Integer[]{21,22,32});
         lugaresOcupados.put(3,new Integer[]{19});
         setState();
+        findViewById(android.R.id.content).setOnTouchListener(new OnSwipeTouchListener(this){
+            @Override
+            public void onSwipeLeft(){
+                if(carruagemAtual<limiteCarruagens){
+                    carruagemAtual += 1;
+                }else{
+                    return;
+                }
+                setState();
+            }
+
+            public void onSwipeRight(){
+                if(carruagemAtual > 1){
+                    carruagemAtual -= 1;
+                }else{
+                    return;
+                }
+                setState();
+            }
+        });
     }
 
     private void setState(){

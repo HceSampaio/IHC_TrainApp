@@ -265,17 +265,20 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
                 String hora = group.get(1);
                 String horachegada = group.get(2);
 
-                List<List<String>> child = (List<List<String>>)listAdapter.getChild(groupPosition,0);
                 ViewGroup linearLayout1 = (ViewGroup)((ViewGroup)v).getChildAt(0);
                 ViewGroup linearLayout2 = (ViewGroup)((ViewGroup)linearLayout1).getChildAt(0);
-                TextView car = (TextView)linearLayout2.getChildAt(0);
-                TextView lug = (TextView)linearLayout2.getChildAt(1);
+                ViewGroup linearLayout3 = (ViewGroup)((ViewGroup)linearLayout2).getChildAt(0);
+                TextView car = (TextView)linearLayout3.getChildAt(0);
+                TextView pre = (TextView)linearLayout3.getChildAt(1);
                 String carruagem = car.getText().toString();
+                double preco = Double.parseDouble(pre.getText().toString().split(" ")[0]);
+
+                //layout2.1.0
+                TextView lug = (TextView)((ViewGroup)linearLayout2.getChildAt(1)).getChildAt(0);
                 String lugar = lug.getText().toString();
 
-                double preco = Double.parseDouble(child.get(0).get(2).split(" ")[0]);
                 currentBilhete = new Bilhete(comboio, carruagem, lugar, chegada, partida, horachegada, hora, data, preco);
-                Log.d("BILHETE",currentBilhete.toString() + "......preco:"+child.get(0).get(2));
+                Log.d("BILHETE",currentBilhete.toString() + "......preco:"+preco);
 
                 Client c = Client.getInstance();
                 if (c.logged_in()){
@@ -311,8 +314,8 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
             carruagemEscolhida = data.getIntExtra("carruagem", 1);
             lugarEscolhido = data.getIntExtra("lugar", 0);
 
-            TextView carruagem = (TextView)bilheteEscolhido.getChildAt(0);
-            TextView lugar = (TextView)bilheteEscolhido.getChildAt(1);
+            TextView carruagem = (TextView)((ViewGroup)((ViewGroup)bilheteEscolhido.getParent()).getChildAt(0)).getChildAt(0);
+            TextView lugar = (TextView)bilheteEscolhido.getChildAt(0);
             carruagem.setText("CARRUAGEM: "+carruagemEscolhida);
             lugar.setText("LUGAR: "+lugarEscolhido);
             Toast.makeText(this, "Lugar alterado com sucesso!", Toast.LENGTH_SHORT).show();

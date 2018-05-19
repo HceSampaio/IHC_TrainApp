@@ -10,6 +10,118 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:weightSum="10"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:weightSum="10"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/carruagem"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="abc"
+                    android:layout_weight="5"
+                    android:onClick="empty"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/preco"
+                    android:layout_width="match_parent"
+                    android:onClick="empty"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="5"
+                    android:text="PRECO : 35 euros" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:weightSum="10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lugar"
+                    android:gravity="center_vertical"
+                    android:text="aaa"
+                    android:onClick="empty"
+                    android:layout_width="match_parent"
+                    android:layout_weight="5"
+                    android:layout_height="0dp"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/edit_card"
+                    android:onClick="selectSeat"
+                    android:layout_width="match_parent"
+                    android:layout_weight="5"
+                    android:layout_height="0dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="5dp">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:paddingStart="10dp"
+                        android:src="@drawable/ic_edit_black_24dp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_event_seat_black_24dp"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/compra_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="COMPRAR"/>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="vertical"
@@ -95,7 +207,7 @@
                     app:cardElevation="3dp"
                     app:cardCornerRadius="5dp"
                     android:layout_weight="0.20">
-        <!--android:onClick="comprar_bilhete"-->
+        android:onClick="comprar_bilhete">
 
                     <TextView
                         android:id="@+id/compra_btn"
@@ -111,5 +223,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
+-->
 </android.support.v7.widget.CardView>
