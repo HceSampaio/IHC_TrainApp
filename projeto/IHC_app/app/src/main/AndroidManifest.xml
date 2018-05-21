@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".routineActivity"
-            android:label="My Routines"
+            android:label="@string/title_activity_rotinas"
             android:parentActivityName=".MainMenu"
             android:screenOrientation="portrait">
             <meta-data
@@ -56,7 +56,16 @@
         </activity>
         <activity
             android:name=".New_routine_Activity"
-            android:label="New Routine"
+            android:label="@string/title_activity_newRoutine"
+            android:parentActivityName=".routineActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ihc.ihc_app.routineActivity" />
+        </activity>
+        <activity
+            android:name=".edit_routine_Activity"
+            android:label="@string/title_activity_editRoutine"
             android:parentActivityName=".routineActivity"
             android:screenOrientation="portrait">
             <meta-data

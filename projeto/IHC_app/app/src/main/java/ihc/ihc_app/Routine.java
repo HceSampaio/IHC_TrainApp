@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Routine {
 
-
     private String comboio;
     private String cidade_partida;
     private String cidade_chegada;
@@ -19,6 +18,22 @@ public class Routine {
     private String data_fim;
     private String antecedencia_num;
     private String antecedencia_tempo;
+
+    public Routine(String comboio, String cidade_partida, String cidade_chegada, String hora_partida, String hora_chegada, List<String> repetir, String data_fim, String antecedencia_num, String antecedencia_tempo) {
+        this.comboio = comboio;
+        this.cidade_partida = cidade_partida;
+        this.cidade_chegada = cidade_chegada;
+        this.hora_partida = hora_partida;
+        this.hora_chegada = hora_chegada;
+        this.repetir = repetir;
+        this.data_fim = data_fim;
+        this.antecedencia_num = antecedencia_num;
+        this.antecedencia_tempo = antecedencia_tempo;
+    }
+
+    public Routine(){
+
+    }
 
     public boolean isComplete(){
         Routine r = this;
@@ -74,7 +89,7 @@ public class Routine {
         for(int i=0;i<repetir.size();i++){
             s+=repetir.get(i)+",";
         }
-        return s.substring(0,s.length()-2);
+        return s.substring(0,s.length()-1);
     }
 
     public void addRepetir(String repetir) {
@@ -107,5 +122,20 @@ public class Routine {
 
     public void setAntecedencia_tempo(String antecedencia) {
         this.antecedencia_tempo = antecedencia;
+    }
+
+    @Override
+    public String toString() {
+        return "Routine{" +
+                "comboio='" + comboio + '\'' +
+                ", cidade_partida='" + cidade_partida + '\'' +
+                ", cidade_chegada='" + cidade_chegada + '\'' +
+                ", hora_partida='" + hora_partida + '\'' +
+                ", hora_chegada='" + hora_chegada + '\'' +
+                ", repetir=" + repetir +
+                ", data_fim='" + data_fim + '\'' +
+                ", antecedencia_num='" + antecedencia_num + '\'' +
+                ", antecedencia_tempo='" + antecedencia_tempo + '\'' +
+                '}';
     }
 }

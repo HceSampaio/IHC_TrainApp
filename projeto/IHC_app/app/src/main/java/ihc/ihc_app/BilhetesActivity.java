@@ -49,14 +49,15 @@ public class BilhetesActivity extends AppCompatActivity {
 
         List<String> tmp = new ArrayList<>();
         tmp.add("R14132");
+        tmp.add("24-06-2018");
         tmp.add("Aveiro");
         tmp.add("Coimbra");
         tmp.add("17:24");
         tmp.add("18:06");
         listHeaders.add(tmp);
         List<String> tmp1 = new ArrayList<>();
-        tmp1.add("CARRUAGEM: 1");
-        tmp1.add("LUGAR: 5");
+        tmp1.add(getString(R.string.carruagem) + "1");
+        tmp1.add(getString(R.string.lugar) + "5");
         tmp1.add("12.43 €");
         List<List<String>> zero = new ArrayList<>();
         zero.add(tmp1);
@@ -66,14 +67,15 @@ public class BilhetesActivity extends AppCompatActivity {
             Log.d("MYBILHETES",b.toString());
             tmp = new ArrayList<>();
             tmp.add(b.getComboio());
+            tmp.add(b.getData().toString());
             tmp.add(b.getEstacao_partida());
             tmp.add(b.getEstacao_chegada());
             tmp.add(b.getHora_partida());
             tmp.add(b.getHora_chegada());
             listHeaders.add(tmp);
             tmp1 = new ArrayList<>();
-            tmp1.add("CARRUAGEM: " + b.getCarruagem());
-            tmp1.add("LUGAR: " + b.getLugar());
+            tmp1.add(getString(R.string.carruagem) + b.getCarruagem());
+            tmp1.add(getString(R.string.lugar) + b.getLugar());
             tmp1.add(b.getPreco() + "€");
             zero = new ArrayList<>();
             zero.add(tmp1);

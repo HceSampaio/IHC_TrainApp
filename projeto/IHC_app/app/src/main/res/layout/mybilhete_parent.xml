@@ -26,15 +26,32 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <TextView
-                    android:id="@+id/bilhete_comboio"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:gravity="center"
                     android:layout_height="match_parent"
-                    android:textSize="18dp"
-                    android:textAlignment="center"
-                    android:text="COMBOIO"/>
+                    android:layout_weight="3"
+                    android:weightSum="4"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/bilhete_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:textSize="18dp"
+                        android:textAlignment="center"
+                        android:text="31-5-2018"
+                        android:layout_weight="2"/>
+
+                    <TextView
+                        android:id="@+id/bilhete_comboio"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:textSize="12dp"
+                        android:textAlignment="center"
+                        android:text="COMBOIO"
+                        android:layout_weight="2"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"

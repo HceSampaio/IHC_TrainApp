@@ -1,7 +1,10 @@
 package ihc.ihc_app;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -38,6 +41,8 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
 
     private ViewGroup bilheteEscolhido;
 
+    Context context;
+
     int carruagemEscolhida;
     int lugarEscolhido;
 
@@ -49,9 +54,11 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurar_comboio);
 
+        context = this;
+
         listView = (ExpandableListView)findViewById(R.id.lvExp);
 
-        List<String> cidades_partida = new ArrayList<>();
+        final List<String> cidades_partida = new ArrayList<>();
         cidades_partida.add("PARTIDA");
         cidades_partida.add("Aveiro");
         cidades_partida.add("Porto");
@@ -258,7 +265,7 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
         listView.setAdapter(listAdapter);
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id){
+            public boolean onChildClick(final ExpandableListView parent, View v, final int groupPosition, int childPosition, long id){
                 // COMPRA DE BILHETE
                 List<String> group = (List<String>)listAdapter.getGroup(groupPosition);
                 String comboio = group.get(0);
@@ -280,11 +287,20 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
                 currentBilhete = new Bilhete(comboio, carruagem, lugar, chegada, partida, horachegada, hora, data, preco);
                 Log.d("BILHETE",currentBilhete.toString() + "......preco:"+preco);
 
-                Client c = Client.getInstance();
+                final Client c = Client.getInstance();
                 if (c.logged_in()){
-                    c.addBilhetes(currentBilhete);
-                    parent.collapseGroup(groupPosition);
-                    Toast.makeText(parent.getContext(), "Bilhete comprado com sucesso!", Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(context)
+                            .setTitle(getResources().getString(R.string.confirm_title))
+                            .setMessage("Está prestes a comprar o seguinte bilhete\n"+currentBilhete.shortToString())
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    c.addBilhetes(currentBilhete);
+                                    parent.collapseGroup(groupPosition);
+                                    Toast.makeText(parent.getContext(), "Bilhete comprado com sucesso!", Toast.LENGTH_LONG).show();
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
                 }else{
                     Toast.makeText(parent.getContext(), "Inicie sessão para comprar um bilhete.", Toast.LENGTH_SHORT).show();
                 }

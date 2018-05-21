@@ -1,24 +1,23 @@
 package ihc.ihc_app;
 
 
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import ihc.ihc_app.MyAdapters.MyArrayAdapter;
 
@@ -53,8 +52,8 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
         cidades_chegada.add("Santarem");
         cidades_chegada.add("Faro");
 
-        final MyArrayAdapter<String> adapter_partida = new MyArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new ArrayList<>(cidades_partida),new ArrayList<>(cidades_partida));
-        final MyArrayAdapter<String> adapter_chegada = new MyArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new ArrayList<>(cidades_chegada),new ArrayList<>(cidades_chegada));
+        final MyArrayAdapter<String> adapter_partida = new MyArrayAdapter<String>(this, R.layout.my_spinner_layout, new ArrayList<>(cidades_partida),new ArrayList<>(cidades_partida));
+        final MyArrayAdapter<String> adapter_chegada = new MyArrayAdapter<String>(this, R.layout.my_spinner_layout, new ArrayList<>(cidades_chegada),new ArrayList<>(cidades_chegada));
 
         //ESTACAO PARTIDA/CHEGADA Spinners
         Spinner dynamicSpinner = (Spinner) findViewById(R.id.cidade_partida);
@@ -247,7 +246,7 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
 
                 adapter_hora.clear();
 
-                if(comboio_chosen == "AP123") {
+                if(comboio_chosen.equals("AP123")) {
                     adapter_hora.addAll(new ArrayList<String>(horas_partida1));
                 }else{
                     adapter_hora.addAll(new ArrayList<String>(horas_partida2));
@@ -384,7 +383,6 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
             Client c = Client.getInstance();
             c.addRoutines(routine);
             this.finish();
-            //Toast.makeText(New_routine_Activity.this, "Routina Criada!", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(New_routine_Activity.this, "Por favor Preencher todos os campos", Toast.LENGTH_LONG).show();
         }

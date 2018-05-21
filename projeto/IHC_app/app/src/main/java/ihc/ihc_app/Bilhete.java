@@ -105,6 +105,8 @@ public class Bilhete {
         return lugar;
     }
 
+    public Data getData() { return data; }
+
     @Override
     public String toString() {
         return "Bilhete{" +
@@ -119,5 +121,19 @@ public class Bilhete {
                 ", data=" + data +
                 ", preco=" + preco +
                 '}';
+    }
+
+    public String verboseToString(){
+        return "comboio "+comboio+" carruagem "+carruagem+", lugar "+lugar+" com partida na estação de "+estacao_partida+" às "+
+                hora_partida+" com destino à estação de "+estacao_chegada+" às "+hora_chegada+". Preço: "+preco+"€"+" Data: "+data;
+    }
+
+    public String shortToString(){
+        return "Comboio: "+comboio+
+                "\nPartida: "+estacao_partida+" "+hora_partida+"h"+
+                "\nChegada: "+estacao_chegada+" "+hora_chegada+"h"+
+                "\nCarruagem: "+carruagem+" Lugar: "+lugar+
+                "\nPreço: "+preco+"€"+
+                "\nData: "+data;
     }
 }

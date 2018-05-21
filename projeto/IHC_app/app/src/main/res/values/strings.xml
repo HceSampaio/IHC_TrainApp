@@ -29,8 +29,19 @@
     <string name="title_activity_maps">Mapa</string>
     <string name="title_activity_procurar">Horários / Compra de bilhetes</string>
     <string name="title_activity_escolherlugar">Escolher lugar</string>
+    <string name="title_activity_rotinas">Rotinas</string>
+    <string name="title_activity_newRoutine">Criar nova rotina</string>
+    <string name="title_activity_editRoutine">Editar rotina</string>
     <string name="prompt_mapa">Escolha uma estação</string>
 
     <string name="leftArrow">&#60;</string>
     <string name="rightArrow">&#62;</string>
+
+    <string name="carruagem">CARRUAGEM:&#032;</string>
+    <string name="lugar">LUGAR:&#032;</string>
+
+    <string name="confirm_title">Confirmação</string>
+    <string name="deleteRoutine_text">Tem a certeza que quer eliminar esta rotina?</string>
+
+    <string name="yes">SIM</string>
 </resources>

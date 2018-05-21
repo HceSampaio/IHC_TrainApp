@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ihc.ihc_app.routineActivity">
+    tools:context="routineActivity">
 
-    <include layout="@layout/activity_routine" />
+    <ExpandableListView
+        android:id="@+id/lvRoutines"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ExpandableListView>
 
     <ImageView
         android:id="@+id/add_icon"

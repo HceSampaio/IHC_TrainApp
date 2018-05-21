@@ -1,6 +1,7 @@
 package ihc.ihc_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,12 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class BilhetesExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListRoutineAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<List<String>> listHeaders;
     private HashMap<List<String>,List<List<String>>> listHashMap;
 
-    public BilhetesExpandableListAdapter(Context context, List<List<String>> listHeaders, HashMap<List<String>, List<List<String>>> listHashMap) {
+    public ExpandableListRoutineAdapter(Context context, List<List<String>> listHeaders, HashMap<List<String>, List<List<String>>> listHashMap) {
         this.context = context;
         this.listHeaders = listHeaders;
         this.listHashMap = listHashMap;
@@ -61,21 +62,18 @@ public class BilhetesExpandableListAdapter extends BaseExpandableListAdapter {
         List<String> headerTitle = (List<String>)getGroup(i);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.mybilhete_parent, null);
+            view = inflater.inflate(R.layout.parent_list, null);
         }
-        TextView comboio = (TextView)view.findViewById(R.id.bilhete_comboio);
-        TextView data = (TextView)view.findViewById(R.id.bilhete_data);
-        TextView cidade_partida = (TextView)view.findViewById(R.id.bilhete_cidade);
-        TextView cidade_chegada = (TextView)view.findViewById(R.id.bilhete_cidadechegada);
-        TextView hora_partida = (TextView)view.findViewById(R.id.bilhete_hora);
-        TextView hora_chegada = (TextView)view.findViewById(R.id.bilhete_horachegada);
 
-        comboio.setText(headerTitle.get(0));
-        data.setText(headerTitle.get(1));
-        cidade_partida.setText(headerTitle.get(2));
-        cidade_chegada.setText(headerTitle.get(3));
-        hora_partida.setText(headerTitle.get(4));
-        hora_chegada.setText(headerTitle.get(5));
+        TextView origem = (TextView)view.findViewById(R.id.routine_origem);
+        TextView destino = (TextView)view.findViewById(R.id.routine_destino);
+        TextView hora = (TextView)view.findViewById(R.id.routine_hora);
+        TextView dias = (TextView)view.findViewById(R.id.routine_dias);
+
+        origem.setText(headerTitle.get(0));
+        destino.setText(headerTitle.get(1));
+        hora.setText(headerTitle.get(2));
+        dias.setText(headerTitle.get(3));
 
         return view;
     }
@@ -85,14 +83,19 @@ public class BilhetesExpandableListAdapter extends BaseExpandableListAdapter {
         List<List<String>> childText = (List<List<String>>)getChild(i,i1);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.mybilhete_child, null);
+            view = inflater.inflate(R.layout.child_list, null);
         }
-        TextView carruagem = (TextView)view.findViewById(R.id.bilhete_carruagem);
-        TextView lugar = (TextView)view.findViewById(R.id.bilhete_lugar);
-        TextView preco = (TextView)view.findViewById(R.id.bilhete_preco);
-        carruagem.setText(childText.get(i1).get(0));
-        lugar.setText(childText.get(i1).get(1));
-        preco.setText(childText.get(i1).get(2));
+        TextView comboio = (TextView)view.findViewById(R.id.routine_comboio);
+        TextView antecedencia = (TextView)view.findViewById((R.id.routine_antecedencia));
+        TextView hora_partida = (TextView)view.findViewById(R.id.routine_child_hora_partida);
+        TextView hora_chegada = (TextView)view.findViewById(R.id.routine_child_hora_chegada);
+
+        Log.d("ROUTINEADAPTER",childText.get(i1).toString());
+
+        comboio.setText(childText.get(i1).get(0));
+        antecedencia.setText(childText.get(i1).get(1));
+        hora_partida.setText(childText.get(i1).get(2));
+        hora_chegada.setText(childText.get(i1).get(3));
 
         return view;
     }

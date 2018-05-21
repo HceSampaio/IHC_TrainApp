@@ -1,90 +1,68 @@
 package ihc.ihc_app;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import ihc.ihc_app.Models.TitleChild;
-import ihc.ihc_app.Models.TitleParent;
 
 
 public class routineActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    MyAdapter adapter;
-    List<ParentObject> parentItemList;
+    private int lastExpanded;
+    private ExpandableListView listView;
+    private ExpandableListRoutineAdapter listAdapter;
+    private List<List<String>> listHeaders;
+    private HashMap<List<String>,List<List<String>>> listHash;
+
+    private Context context;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //((MyAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
     }
+
     @Override
     protected void onResume(){
         super.onResume();
 
-
         Client c = Client.getInstance();
         List<Routine> routines = c.getRoutines();
 
-        if(adapter.getItemCount()-1 < routines.size()){
+        if(listHeaders.size() < routines.size()){
 
             Routine r = routines.get(routines.size()-1);//get last routine()
 
-            //parametros de uma rotina
-            TitleParent parent = null;
-            List<Object> childList;
-            TitleChild child;
+            List<String> tmp;
+            List<String> tmp1;
 
-            String destin,hour;
-            List<String> days = null;
-            String comboio,carruagem,lugar,before_num,before_tempo;
-            ////////////////////////////////////
+            List<List<String>> zero;
 
-            days = r.getRepetir();
-            destin = r.getCidade_chegada();
-            hour = r.getHora_partida();
+            tmp = new ArrayList<>();
+            tmp.add(r.getCidade_partida());
+            tmp.add(r.getCidade_chegada());
+            tmp.add(r.getHora_partida());
+            tmp.add(r.getRepetirAsString());
+            listHeaders.add(tmp);
+            tmp1 = new ArrayList<>();
+            tmp1.add(r.getComboio());
+            tmp1.add("ANTECEDENCIA: "+r.getAntecedencia_num() + " "+ r.getAntecedencia_tempo());
+            tmp1.add(r.getHora_partida());
+            tmp1.add(r.getHora_chegada());
+            zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
 
-            parent = new TitleParent(destin,hour,days);//gerar parent
-
-            childList = new ArrayList<>();
-            comboio=r.getComboio();
-            carruagem="5";
-            lugar="16";
-            before_num = r.getAntecedencia_num();
-            before_tempo=r.getAntecedencia_tempo();
-
-            child = new TitleChild(comboio,carruagem,lugar,before_num,before_tempo);//new child
-            childList.add(child);//lista dos filhos do parent
-
-            parent.setChildObjectList(childList);//lista de filhos de parent = childlist
-
-            parentItemList.add(parent);
-
-            adapter = new MyAdapter(this,parentItemList); //meter conteudo dos pais e meter os filhos dentros dos pais
-            adapter.setParentClickableViewAnimationDefaultDuration();
-            adapter.setParentAndIconExpandOnClick(true);
-            recyclerView.setAdapter(adapter);
-            //adapter.notifyItemInserted(adapter.getItemCount()-1);
-            //adapter = new MyAdapter(this,parentItemList);
-
-            /*
-            TO REMOVE STUFF
-            list.remove(position);
-            recycler.removeViewAt(position);
-            mAdapter.notifyItemRemoved(position);
-            mAdapter.notifyItemRangeChanged(position, list.size());
-
-             */
-
+            listAdapter = new ExpandableListRoutineAdapter(this,listHeaders,listHash);
+            listView.setAdapter(listAdapter);
         }
 
     }
@@ -94,88 +72,97 @@ public class routineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_routines);
 
-        recyclerView = (RecyclerView)findViewById(R.id.myRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        context = this;
 
-        parentItemList = initData();
-        adapter = new MyAdapter(this,initData()); //meter conteudo dos pais e meter os filhos dentros dos pais
-        adapter.setParentClickableViewAnimationDefaultDuration();
-        adapter.setParentAndIconExpandOnClick(true);
+        listView = (ExpandableListView)findViewById(R.id.lvRoutines);
+        initData();
+        //Log.d("AFTERPARTY",listHash.get(listHeaders.get(0)).toString() + ".....");
+        listAdapter = new ExpandableListRoutineAdapter(this,listHeaders,listHash);
+        listView.setAdapter(listAdapter);
+        listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int i) {
+                if(lastExpanded != -1 && i != lastExpanded){
+                    listView.collapseGroup(lastExpanded);
+                }
+                lastExpanded = i;
+            }
+        });
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                // DELETE DE ROTINA
 
-        recyclerView.setAdapter(adapter);
+                final int innerI = i;
+                final int innerI1 = i1;
+                new AlertDialog.Builder(context)
+                        .setTitle(getResources().getString(R.string.confirm_title))
+                        .setMessage(getResources().getString(R.string.deleteRoutine_text))
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Client c = Client.getInstance();
+                                Routine r = c.getRoutines().get(innerI);
+                                c.removeRoutines(r);
+
+                                listHash.remove(listHeaders.get(innerI));
+                                listHeaders.remove(innerI);
+
+                                listAdapter = new ExpandableListRoutineAdapter(context,listHeaders,listHash);
+                                listView.setAdapter(listAdapter);
+                                Toast.makeText(context, "Rotina eliminada com sucesso", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+
+                return false;
+            }
+        });
     }
 
-    private List<ParentObject> initData() {
+    private void initData() {
 
         Client c = Client.getInstance();
         List<Routine> routines = c.getRoutines();
 
-        List<ParentObject> parent_array = new ArrayList<>();
+        if (listHeaders == null){
+            listHeaders = new ArrayList<>();
+            listHash = new HashMap<>();
+        }
 
-        //parametros de uma rotina
-        TitleParent parent = null;
-        List<Object> childList;
-        TitleChild child;
+        List<String> tmp;
+        List<String> tmp1;
 
-        String destin,hour;
-        List<String> days = null;
-        String comboio,carruagem,lugar,before_num,before_tempo;
-
-        //add dummy routine
-        days = new ArrayList<String>();
-        days.add("Ter");
-        days.add("Sex");
-        destin = "Aveiro";
-        hour = "16:40";
-        parent = new TitleParent(destin,hour,days);
-
-        childList = new ArrayList<>();
-        comboio="IC127";
-        carruagem="7";
-        lugar="20";
-        before_num = "15";
-        before_tempo = "Min";
-
-        child = new TitleChild(comboio,carruagem,lugar,before_num,before_tempo);
-        childList.add(child);
-
-        parent.setChildObjectList(childList);
-        parent_array.add(parent);
+        List<List<String>> zero;
 
         //Add client's routines
         for(int i=0;i<routines.size(); i++){
             Routine r = routines.get(i);
 
-            days = r.getRepetir();
-            destin = r.getCidade_chegada();
-            hour = r.getHora_partida();
+            tmp = new ArrayList<>();
+            tmp.add(r.getCidade_partida());
+            tmp.add(r.getCidade_chegada());
+            tmp.add(r.getHora_partida());
+            tmp.add(r.getRepetirAsString());
+            listHeaders.add(tmp);
+            tmp1 = new ArrayList<>();
+            tmp1.add(r.getComboio());
+            tmp1.add("ANTECEDENCIA: "+r.getAntecedencia_num() + " "+ r.getAntecedencia_tempo());
+            tmp1.add(r.getHora_partida());
+            tmp1.add(r.getHora_chegada());
 
-            parent = new TitleParent(destin,hour,days);//gerar parent
+            zero = new ArrayList<>();
+            zero.add(tmp1);
+            listHash.put(tmp,zero);
 
-            childList = new ArrayList<>();
-            comboio=r.getComboio();
-            carruagem="5";
-            lugar="16";
-            before_num = r.getAntecedencia_num();
-            before_tempo=r.getAntecedencia_tempo();
-
-            child = new TitleChild(comboio,carruagem,lugar,before_num,before_tempo);//new child
-            childList.add(child);//lista dos filhos do parent
-
-            parent.setChildObjectList(childList);//lista de filhos de parent = childlist
-
-            parent_array.add(parent);
         }
-
-        return parent_array;
 
     }
 
     public void open_new_routine (View view){
         Intent intent = new Intent (this, New_routine_Activity.class);
         startActivity(intent);
-        //Client c = Client.getInstance();
-        //parentItemList.add(updateParent());
-        //UpdateData();
     }
+
+    public void empty (View view){ }
 }
