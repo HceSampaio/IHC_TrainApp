@@ -2,6 +2,7 @@ package ihc.ihc_app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +14,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,6 +55,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_layout, nomesEstacoes);
         sp.setAdapter(adapter);
+        sp.setBackgroundResource(R.color.mdtp_white);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,6 +83,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void loadEstacoes(){
+        /*
         if (estacoes == null) {
             estacoes = new HashMap<>();
             estacoes.put("Aveiro", new Double[]{40.6452789306641, -8.63984107971191});
@@ -97,6 +105,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             estacoes.put("Porto-Campanha", new Double[]{41.1496238708496, -8.58551406860352});
             estacoes.put("Porto-Sao Bento", new Double[]{41.1456642150879, -8.60959243774414});
             estacoes.put("Espinho", new Double[]{41.0061950683594, -8.64448547363281});
+        }*/
+        if(estacoes == null){
+            estacoes = new HashMap<>();
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(
+                        new InputStreamReader(getAssets().open("trainStations.csv"), "UTF-8"));
+                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
+                String[] nextRecord;
+                while ((nextRecord = csvReader.readNext()) != null) {
+                    String estacao = nextRecord[2];
+                    double lat = Double.parseDouble(nextRecord[4]);
+                    double lon = Double.parseDouble(nextRecord[5]);
+                    Log.d("ESTACOESREAD",nextRecord[2]+" "+nextRecord[4]+" "+nextRecord[5]);
+                    estacoes.put(estacao, new Double[]{lat, lon});
+                }
+            } catch (IOException e) { }
+            finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) { }
+                }
+            }
         }
     }
 

@@ -57,6 +57,7 @@ public class routineActivity extends AppCompatActivity {
             tmp1.add("ANTECEDENCIA: "+r.getAntecedencia_num() + " "+ r.getAntecedencia_tempo());
             tmp1.add(r.getHora_partida());
             tmp1.add(r.getHora_chegada());
+            tmp1.add("FIM: "+r.getData_fim());
             zero = new ArrayList<>();
             zero.add(tmp1);
             listHash.put(tmp,zero);
@@ -150,6 +151,7 @@ public class routineActivity extends AppCompatActivity {
             tmp1.add("ANTECEDENCIA: "+r.getAntecedencia_num() + " "+ r.getAntecedencia_tempo());
             tmp1.add(r.getHora_partida());
             tmp1.add(r.getHora_chegada());
+            tmp1.add("FIM: "+r.getData_fim());
 
             zero = new ArrayList<>();
             zero.add(tmp1);

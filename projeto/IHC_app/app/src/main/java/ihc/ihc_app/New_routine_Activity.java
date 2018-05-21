@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,11 +22,11 @@ import java.util.List;
 
 import ihc.ihc_app.MyAdapters.MyArrayAdapter;
 
-public class New_routine_Activity extends AppCompatActivity implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener{
+public class New_routine_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     Routine routine;
-
-
+    List<String> horas;
+    ArrayAdapter<String> adapter_hora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,9 +202,20 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
             public void onClick(View view){
                 Calendar now = Calendar.getInstance();
                 DatePickerDialog datePD = DatePickerDialog.newInstance(New_routine_Activity.this, now.get(Calendar.YEAR),now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-                datePD.setTitle("Escolher Data Fim da Rotina");
+                datePD.setTitle(getResources().getString(R.string.newRoutine_calendarTitle));
                 datePD.show(getFragmentManager(),"Data Fim");
 
+            }
+        });
+
+        CardView hora = (CardView)findViewById(R.id.hora_card);
+        hora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePD = TimePickerDialog.newInstance(New_routine_Activity.this, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true);
+                timePD.setTitle(getResources().getString(R.string.newRoutine_hourTitle));
+                timePD.show(getFragmentManager(), "Hora");
             }
         });
 
@@ -212,25 +224,26 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
         List<String> lista_comboios = new ArrayList<>();
         lista_comboios.add("AP123");
         lista_comboios.add("IC859");
+        lista_comboios.add("IC324");
 
-        final List<String> horas_partida1 = new ArrayList<>();
-        horas_partida1.add("10:30 - 12:38");
-        horas_partida1.add("12:30 - 15:38");
-        horas_partida1.add("16:30 - 19:38");
-        horas_partida1.add("22:30 - 01:38");
+        horas = new ArrayList<>(); // lista com elementos no formato IC324 16:32 - 17:19
 
-        final List<String> horas_partida2 = new ArrayList<>();
-        horas_partida2.add("10:55 - 12:20");
-        horas_partida2.add("12:55 - 14:20");
-        horas_partida2.add("16:55 - 18:20");
-        horas_partida2.add("22:55 - 23:20");
+        for(int h = 0; h<23; h++){
+            int i = 0;
+            for(int m = 21; m < 45; m+=9){
+                String hora_partida = h+":"+m;
+                String hora_chegada = (h+1)+":"+(m-8);
+                horas.add(lista_comboios.get(i)+" "+hora_partida+" - " +hora_chegada);
+                i+=1;
+            }
+        }
 
         List<String> default_hora = new ArrayList<>();
-        default_hora.add("HORÁRIO");
+        default_hora.add("COMBOIOS");
 
-        final ArrayAdapter<String> adapter_hora = new ArrayAdapter<String>(this, R.layout.my_spinner_layout, new ArrayList<>(default_hora));
+        adapter_hora = new ArrayAdapter<String>(this, R.layout.my_spinner_layout, new ArrayList<>(default_hora));
         final ArrayAdapter<String> adapter_comboio = new ArrayAdapter<String>(this,R.layout.my_spinner_layout, new ArrayList<>(lista_comboios));
-
+/*
         Spinner spinner_comboio = (Spinner) findViewById(R.id.cod_comboio);
         spinner_comboio.setAdapter(adapter_comboio);
         spinner_comboio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -263,6 +276,7 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
             }
 
         });
+*/
 
 
         Spinner spinner_hora = (Spinner) findViewById(R.id.hora_comboio);
@@ -270,16 +284,20 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
         spinner_hora.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String horas = (String)parent.getItemAtPosition(position);
-                if (!horas.equals("default_hora")) {
-                    String[] h = horas.split(" - ");
-                    routine.setHora_partida(h[0]);
-                    routine.setHora_chegada(h[1]);
-                }
-                Log.v("item", (String) parent.getItemAtPosition(position));
-                //Toast.makeText(New_routine_Activity.this,(String) parent.getItemAtPosition(position), Toast.LENGTH_LONG).show();
                 Spinner tv = (Spinner) findViewById(R.id.hora_comboio);
-                tv.setSelection(position);
+                if(tv.getAdapter().getCount()>1) {
+
+                    String s = tv.getAdapter().getItem(position).toString();
+                    String comboio = s.split(" ")[0];
+                    String hora_partida = s.split(" ")[1];
+                    String hora_chegada = s.split(" ")[3];
+
+                    routine.setHora_partida(hora_partida);
+                    routine.setHora_chegada(hora_chegada);
+                    routine.setComboio(comboio);
+
+                    tv.setSelection(position);
+                }
             }
 
             @Override
@@ -294,10 +312,16 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Data d = new Data(dayOfMonth,monthOfYear+1,year);
-        routine.setData_fim(d.toString());
-        TextView tv = (TextView) findViewById(R.id.fim_date);
-        tv.setText(d.toString());
-        //Toast.makeText(New_routine_Activity.this, String.format("Data de Fim da Rotina Alterada para %s)",d.toString()), Toast.LENGTH_LONG).show();
+        Calendar now = Calendar.getInstance();
+        Data today = new Data(now.get(Calendar.DAY_OF_MONTH),now.get(Calendar.MONTH),now.get(Calendar.YEAR));
+        if(d.compareTo(today)>=0){
+            routine.setData_fim(d.toString());
+            TextView tv = (TextView) findViewById(R.id.fim_date);
+            tv.setText(d.toString());
+        }
+        else{
+            Toast.makeText(New_routine_Activity.this, "Data de fim inválida! Escolha data futura!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void box_clicked(View view){
@@ -386,5 +410,55 @@ public class New_routine_Activity extends AppCompatActivity implements com.wdull
         }else{
             Toast.makeText(New_routine_Activity.this, "Por favor Preencher todos os campos", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+        TextView tv = (TextView) findViewById(R.id.hora_pretendida);
+        String hour = String.format("%02d:%02d",hourOfDay,minute);
+        tv.setText(hour);
+
+        adapter_hora.clear();
+        adapter_hora.addAll(filterHour(hour));
+
+        Spinner sp = (Spinner) findViewById(R.id.hora_comboio);
+        String s = sp.getAdapter().getItem(0).toString();
+        String comboio = s.split(" ")[0];
+        String hora_partida = s.split(" ")[1];
+        String hora_chegada = s.split(" ")[3];
+
+        routine.setHora_partida(hora_partida);
+        routine.setHora_chegada(hora_chegada);
+        routine.setComboio(comboio);
+    }
+
+    private List<String> filterHour(String hour){ //hh:mm from clock
+        int h = Integer.parseInt(hour.split(":")[0]);
+        int m = Integer.parseInt(hour.split(":")[1]);
+        int absHour = (h*60+m)%(24*60+60);
+
+        List<String> filtered = new ArrayList<>();
+
+        for(int i = 0; i<horas.size(); i++){
+            String s = horas.get(i);
+            String hora_partida = s.split(" ")[1];
+            int h_partida = Integer.parseInt(hora_partida.split(":")[0]);
+            int m_partida = Integer.parseInt(hora_partida.split(":")[1]);
+            int abs_partida = (h_partida*60+m_partida)%(24*60+60);
+            if(abs_partida > absHour ){
+                filtered.add(s);
+                filtered.add(horas.get((i+1)%horas.size()));
+                filtered.add(horas.get((i+2)%horas.size()));
+                break;
+            }
+            if(i == horas.size()-1){
+                // hora introduzida é superior ao ultimo comboio
+                filtered.add(horas.get(0));
+                filtered.add(horas.get(1));
+                filtered.add(horas.get(2));
+            }
+        }
+
+        return filtered;
     }
 }

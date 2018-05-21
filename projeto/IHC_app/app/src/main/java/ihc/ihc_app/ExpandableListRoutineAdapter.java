@@ -89,13 +89,14 @@ public class ExpandableListRoutineAdapter extends BaseExpandableListAdapter {
         TextView antecedencia = (TextView)view.findViewById((R.id.routine_antecedencia));
         TextView hora_partida = (TextView)view.findViewById(R.id.routine_child_hora_partida);
         TextView hora_chegada = (TextView)view.findViewById(R.id.routine_child_hora_chegada);
-
+        TextView data_fim = (TextView)view.findViewById(R.id.routine_child_data_fim);
         Log.d("ROUTINEADAPTER",childText.get(i1).toString());
 
         comboio.setText(childText.get(i1).get(0));
         antecedencia.setText(childText.get(i1).get(1));
         hora_partida.setText(childText.get(i1).get(2));
         hora_chegada.setText(childText.get(i1).get(3));
+        data_fim.setText(childText.get(i1).get(4));
 
         return view;
     }

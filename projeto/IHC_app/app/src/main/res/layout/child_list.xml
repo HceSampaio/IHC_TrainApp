@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:text="Comboio" />
+                    android:text="12:30" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -67,7 +67,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:text="COMPRAR 1h ANTES" />
+                    android:text="14:16" />
+
+                <TextView
+                    android:id="@+id/routine_child_data_fim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="9dp"
+                    android:text="FIM: 14-02-1998" />
 
             </LinearLayout>
 

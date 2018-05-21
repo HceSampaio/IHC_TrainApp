@@ -34,6 +34,9 @@
     <string name="title_activity_editRoutine">Editar rotina</string>
     <string name="prompt_mapa">Escolha uma estação</string>
 
+    <string name="newRoutine_calendarTitle">Escolher Data Fim da Rotina</string>
+    <string name="newRoutine_hourTitle">Escolher hora pretendida</string>
+
     <string name="leftArrow">&#60;</string>
     <string name="rightArrow">&#62;</string>
 

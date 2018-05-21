@@ -79,7 +79,7 @@
         android:weightSum="10">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/comboio_card"
+            android:id="@+id/hora_card"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
@@ -92,14 +92,16 @@
                 android:layout_gravity="center"
                 android:gravity="center">
 
-                <Spinner
-                    android:id="@+id/cod_comboio"
+                <TextView
+                    android:id="@+id/hora_pretendida"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:textSize="16dp"
-                    android:text="Comboio" />
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textStyle="italic"
+                    android:textSize="18dp"
+                    android:text="Escolher Hora"/>
 
             </LinearLayout>
 
@@ -131,15 +133,6 @@
                     android:padding="16dp"
                     android:textSize="28dp"
                     android:text="Partida" />
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/arrow"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:padding="16dp"-->
-                    <!--android:src="@drawable/ic_arrow_forward_black_24dp" />-->
-
 
             </LinearLayout>
 

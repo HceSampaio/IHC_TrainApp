@@ -55,4 +55,18 @@ public class Data {
     public int getAno(){
         return ano;
     }
+
+    public int compareTo(Data d){
+        if(this.ano>d.ano){
+            return 1;
+        }else if(this.ano==d.ano && this.mes > d.mes){
+            return 1;
+        }else if(this.ano==d.ano && this.mes == d.mes && this.dia > d.dia){
+            return 1;
+        }else if(this.ano==d.ano && this.mes == d.mes && this.dia == d.dia){
+            return 0;
+        }else{
+            return -1;
+        }
+    }
 }

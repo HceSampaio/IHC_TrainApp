@@ -24,6 +24,10 @@ public class Client {
         }
         return client;
     }
+
+    public static void resetClient(){
+        client = null;
+    }
     public boolean logged_in(){
         return client.getName()!="";
     }
