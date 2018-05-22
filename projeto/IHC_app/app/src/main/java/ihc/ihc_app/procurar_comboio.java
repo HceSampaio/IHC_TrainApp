@@ -145,8 +145,8 @@ public class procurar_comboio extends AppCompatActivity implements DatePickerDia
             public void onClick(View view){
                 Calendar now = Calendar.getInstance();
                 DatePickerDialog datePD = DatePickerDialog.newInstance(procurar_comboio.this, now.get(Calendar.YEAR),now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-                datePD.setTitle("Escolher Data Fim da Rotina");
-                datePD.show(getFragmentManager(),"Data Fim");
+                datePD.setTitle("Escolher Data");
+                datePD.show(getFragmentManager(),"Data");
 
             }
         });
