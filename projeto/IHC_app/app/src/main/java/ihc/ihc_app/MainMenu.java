@@ -51,6 +51,8 @@ public class MainMenu extends AppCompatActivity {
     public void logout (View view){
         Client.resetClient();
         finish();
+        Intent intent = new Intent (this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -371,6 +371,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void open_menu_loggedin(){
         Intent intent = new Intent (this, MainMenu.class);
         System.out.print("open menu");
+        MainActivity.mActivity.finish();
         startActivity(intent);
     }
 }

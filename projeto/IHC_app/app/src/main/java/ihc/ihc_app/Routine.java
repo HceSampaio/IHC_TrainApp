@@ -37,7 +37,7 @@ public class Routine {
 
     public boolean isComplete(){
         Routine r = this;
-        return r.data_fim!=null && r.comboio!= null && r.cidade_chegada!=null && r.cidade_partida!=null && r.hora_chegada!=null && r.hora_partida!=null && repetir!=null && antecedencia_num!=null && antecedencia_tempo!=null;
+        return r.data_fim!=null && r.comboio!= null && r.cidade_chegada!=null && r.cidade_partida!=null && r.hora_chegada!=null && r.hora_partida!=null && repetir.size()>0 && antecedencia_num!=null && antecedencia_tempo!=null;
     }
 
     public String getComboio() {
